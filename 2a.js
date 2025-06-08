@@ -39,7 +39,7 @@ function createMonthConverter()
     {
         if(isNaN(monthNumber))
             return "Bad Number";
-        const no=Math.floor(Number(monthNumber));
+        const no=Math.floor(parseInt(monthNumber));
         if(no<1 || no>12)
             return "Bad Number";
         return months[no-1];
