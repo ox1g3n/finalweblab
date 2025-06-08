@@ -1,4 +1,4 @@
-//works for mongodb server2.6-4.4(in your system) till 4 and driver v1x,v2x,v3x(in node_modules)
+//works for mongodb server2.6-4.4(in your system) till 4 and driver v1x,v2x(in node_modules)
 //mongod --version(for server) npm list mongodb(for driver)
 const express=require('express');
 const bodyParser=require('body-parser');
@@ -26,15 +26,38 @@ MongoClient.connect(mongoUrl,function(err,database){
 
 app.get('/',(req,res)=>{
     res.send(`
-        <h1>Some Record</h1>
-        <form action="/students" method="POST">
-            field1: <input type="text" name="field1" required><br><br>
-            field2: <input type="text" name="field2" required><br><br>
-            continue for more fields
-            <button type="submit">Add Student</button>
-        </form>
-        <br>
-        <a href="/any other end point">View those values or perform the function< 20</a>
+        <h1>Student Records</h1>
+    
+    <h2>Add Student</h2>
+    <form action="/inserting" method="POST">
+      Name: <input type="text" name="name" required><br><br>
+      Semester: <input type="number" name="semester" required><br><br>
+      <button type="submit">Add Student</button>
+    </form>
+    
+    <h2>Update Student</h2>
+    <form action="/updating" method="POST">
+      Current Name: <input type="text" name="currentName" required><br><br>
+      New Name: <input type="text" name="newName"><br><br>
+      New Semester: <input type="number" name="newSemester"><br><br>
+      <button type="submit">Update Student</button>
+    </form>
+    
+    <h2>Delete Student</h2>
+    <form action="/deleting" method="POST">
+      Name to Delete: <input type="text" name="name" required><br><br>
+      <button type="submit">Delete Student</button>
+    </form>
+    
+    <h2>Find Students</h2>
+    <form action="/getting" method="POST">
+      Search by Name: <input type="text" name="name"><br><br>
+      Search by Semester: <input type="number" name="semester"><br><br>
+      <button type="submit">Search Students</button>
+    </form>
+    
+    <br>
+    <a href="/getting">View All Students</a>
     `);
 })
 
