@@ -1,3 +1,5 @@
+//works for mongodb driver(node_modules) 3 and above and server(pc) 4 and above
+//mongod --version(for server) npm list mongodb(for driver)
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 
