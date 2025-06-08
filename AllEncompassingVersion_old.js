@@ -70,7 +70,7 @@ app.post('/inserting',(req,res)=>{
        else{
             res.send("Insertion successful!");
        }
-    });//make sure to use field2:parseInt(field2) incase u want to save as numbers or directly enter as type="number" in the form
+    });//make sure to use field2:parseInt(field2) incase u want to save as numbers
 });
 
 app.get('/getting',(req,res)=>{//for less than,greater than,notequals use ({field1:{$lt:20}}) //gt//ne amnd u can add more fields using commas
