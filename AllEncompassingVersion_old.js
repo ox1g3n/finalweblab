@@ -153,8 +153,8 @@ app.get('/',(req,res)=>{
     <h2>Update Student</h2>
     <form action="/updating" method="POST">
       Current Name: <input type="text" name="currentName" required><br><br>
-      New Name: <input type="text" name="newName"><br><br>
-      New Semester: <input type="number" name="newSemester"><br><br>
+      New Name: <input type="text" name="newName" required><br><br>
+      New Semester: <input type="number" name="newSemester" required><br><br>
       <button type="submit">Update Student</button>
     </form>
     
@@ -205,11 +205,7 @@ app.get('/getting',(req,res)=>{
 
 app.post('/getting',(req,res)=>{
     const {name, semester} = req.body;
-    let query = {};
-    if(name) query.name = name;
-    if(semester) query.semester = parseInt(semester);
-    
-    db.collection('my_collection').find(query).toArray(function(err,results){
+    db.collection('my_collection').find({name:name,semester:parseInt(semester)}).toArray(function(err,results){
         if(err) {
             res.status(500).json({ error: err.message });
         } else {
@@ -234,11 +230,7 @@ app.post('/deleting',(req,res)=>{
 
 app.post('/updating',(req,res)=>{
     const { currentName, newName, newSemester } = req.body;
-    let updateData = {};
-    if(newName) updateData.name = newName;
-    if(newSemester) updateData.semester = parseInt(newSemester);
-    
-    db.collection('my_collection').update({name:currentName}, {$set: updateData}, function(err, result) {
+    db.collection('my_collection').update({name:currentName}, {$set: {name:newName,semester:parseInt(newSemester)}}, function(err, result) {
         if(err) {
             res.status(500).json({ error: err.message });
         } else {
